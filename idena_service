@@ -1,7 +1,7 @@
-1) Navigate in the right path: cd /etc/systemd/system/
-2) create a systemd unit file: touch idena.service
-3) set permissions and paste below content: chmod 755 idena.service
-
+1) Navigate in the right path: #cd /etc/systemd/system/
+2) create a systemd unit file: #touch idena.service
+3) set permissions and paste below content into the idena.service file: #chmod 755 idena.service
+#
 [Unit]
 Description=idena
 
@@ -10,8 +10,9 @@ ExecStart=/bin/bash -c "~/idena-node-linux-0.18.0 --apikey YourApiKey"
 
 [Install]
 WantedBy=multi-user.target
-
-4) Reload systemd daemon to read unit files changes: systemctl daemon-reload
-5) Enable to autostart on boot: systemctl enable idena
-6) Reboot and check with: systemctl status idena
+#
+4) Reload systemd daemon to read unit files changes: #systemctl daemon-reload
+5) Enable to autostart on boot: #systemctl enable idena
+6) Reboot and check with: #systemctl status idena
    You can also check just by connecting with the client to the node
+Good Luck!
