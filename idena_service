@@ -1,11 +1,18 @@
 1) Navigate in the right path: #cd /etc/systemd/system/
 2) create a systemd unit file: #touch idena.service
 3) set permissions and paste below content into the idena.service file: #chmod 755 idena.service
+   #exec start still needs some work done as it does not read the arguments
 #
 [Unit]
 Description=idena
+After=default.target
 
 [Service]
+User=root
+Type=simple
+WorkingDirectory=/root/
+Restart=always
+LimitNOFILE=65535
 ExecStart=/bin/bash -c "~/idena-node-linux-0.18.0 --apikey YourApiKey"
 
 [Install]
