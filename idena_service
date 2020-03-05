@@ -1,11 +1,13 @@
 1) Navigate in the right path: #cd /etc/systemd/system/
 2) create a systemd unit file: #touch idena.service
 3) set permissions and paste below content into the idena.service file: #chmod 755 idena.service
-   #exec start still needs some work done as it does not read the arguments
+   #exec start still needs some work done as it does not read the arguments correctly everytime
+   #this may show you in the desktop client that you are a first time miner in idena and not view your remote node
 #
 [Unit]
 Description=idena
-After=default.target
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 User=root
@@ -13,13 +15,13 @@ Type=simple
 WorkingDirectory=/root/
 Restart=always
 LimitNOFILE=65535
-ExecStart=/bin/bash -c "~/idena-node-linux-0.18.0 --apikey YourApiKey"
+ExecStart=/root/idena-node-linux-0.18.0 --apikey "YourApiKey"
 
 [Install]
 WantedBy=multi-user.target
 #
-4) Reload systemd daemon to read unit files changes: #systemctl daemon-reload
-5) Enable to autostart on boot: #systemctl enable idena
+4) Reload systemd daemon to read unit files changes, enable it to autostart and start the service:
+#systemctl daemon-reload && systemctl enable idena && systemctl start idena
 6) Reboot and check with: #systemctl status idena
    You can also check just by connecting with the client to the node
 Good Luck!
